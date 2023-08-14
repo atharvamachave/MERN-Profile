@@ -1,0 +1,99 @@
+/* About.css */
+
+/* General styling */
+.emp-profile {
+  padding: 3rem 0;
+  max-width: 1200px; /* Increase this value as needed */
+  margin: 0 auto;
+}
+
+/* Email label */
+.about-info label[for='email'] {
+  white-space: nowrap; /* Prevent email label from breaking into multiple lines */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Display ellipsis (...) when content overflows */
+}
+
+/* Email value */
+.about-info p#email {
+  white-space: nowrap; /* Prevent email value from breaking into multiple lines */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Display ellipsis (...) when content overflows */
+  max-width: 85%; /* Adjust this value as needed */
+}
+
+.profile-img img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.profile-head h5 {
+  color: #333;
+}
+
+.profile-head h6 {
+  color: #888;
+}
+
+.profile-rating span {
+  font-size: 12px;
+  color: #ffc107;
+}
+
+.profile-edit-btn {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+  background: #007bff;
+  cursor: pointer;
+}
+
+/* Work links */
+.profile-work {
+  margin-top: 20px; /* Add margin to the top of the work link section */
+}
+
+.profile-work p {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.profile-work a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Tabs */
+.profile-tab .nav-tabs .nav-item {
+  margin-right: 15px;
+}
+
+.profile-tab .nav-tabs .nav-item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Tab content */
+.profile-tab .tab-pane {
+  padding: 15px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .profile-img img {
+    max-width: 150px;
+  }
+  .profile-tab .nav-tabs .nav-item {
+    margin-bottom: 10px;
+  }
+  .profile-work a {
+    font-size: 14px;
+  }
+}

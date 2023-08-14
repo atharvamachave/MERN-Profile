@@ -1,0 +1,12 @@
+/* Navbar.css */
+.navbar-brand {
+  color: #9ca6e6;
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.navbar-brand img {
+  margin-right: 10px; /* Adjust the value to add the desired space */
+  width: 50px;
+  height: 40px;
+}
