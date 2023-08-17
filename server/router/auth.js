@@ -2,42 +2,15 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const authenticate = require('../middleware/authenticate');
+const cookieParser = require('cookie-parser');
+router.use(cookieParser());
 require('../db/conn');
 const User = require('../model/userSchema');
 
 router.get('/', (req, res) => {
   res.send('hello from server router js');
 });
-
-// Using promises
-
-// router.post('/register', (req, res) => {
-//   const { name, email, phone, work, password, cpassword } = req.body;
-
-//   if (!name || !email || !phone || !work || !password || !cpassword) {
-//     return res.status(422).json({ error: 'Fill all the fields' });
-//   }
-
-//   User.findOne({ email: email })
-//     .then((userExists) => {
-//       if (userExists) {
-//         return res.status(422).json({ error: 'Email already exists' });
-//       }
-
-//       const user = new User({ name, email, phone, work, password, cpassword });
-
-//       user
-//         .save()
-//         .then(() => {
-//           res.status(201).json({ message: 'user registered successfully' });
-//         })
-//         .catch((err) => res.status(500).json({ error: 'Failed to register' }));
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
 
 //async await
 router.post('/register', async (req, res) => {
@@ -53,10 +26,6 @@ router.post('/register', async (req, res) => {
     if (userExists) {
       return res.status(422).json({ error: 'Email already exists' });
     } else if (password != cpassword) {
-      // console.log(password);
-      // console.log(cpassword);
-      // const a = password === cpassword;
-      // console.log(a);
       return res.status(422).json({ error: 'Password are not matching' });
     } else {
       const user = new User({
@@ -114,6 +83,17 @@ router.post('/signin', async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+// About us
+router.get('/about', authenticate, (req, res) => {
+  console.log('hello my about');
+  res.send(req.rootUser);
+});
+//get yser data for contact us and home page
+router.get('/getdata', authenticate, (req, res) => {
+  console.log('hello my get data');
+  res.send(req.rootUser);
 });
 
 module.exports = router;

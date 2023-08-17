@@ -15,19 +15,11 @@ app.use(require('./router/auth'));
 
 const PORT = process.env.PORT;
 
-//middleware
-const middleware = (req, res, next) => {
-  console.log(`hello my middleware`);
-  next();
-};
-
 //Routes
-app.get('/', (req, res) => {
-  res.send('hello from server app.js');
-});
-app.get('/about', middleware, (req, res) => {
-  res.send('hello from about');
-});
+
+// app.get('/about', middleware, (req, res) => {
+//   res.send('hello from about');
+// });
 app.get('/contact', (req, res) => {
   // res.cookie('test', 'atharva');
   res.send('hello from contact');

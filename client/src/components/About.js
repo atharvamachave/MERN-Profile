@@ -1,21 +1,59 @@
 // About.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import image from '../images/atharva.jpg';
+import image1 from '../images/image1.jpg';
 import './About.css';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const About = () => {
+  const navigate = useNavigate();
+
+  const [userData, setuserData] = useState({});
+
+  const callAboutPage = async () => {
+    try {
+      const res = await fetch('/about', {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'aplication/json',
+        },
+        credentials: 'include',
+      });
+
+      const data = await res.json();
+      console.log(data);
+      setuserData(data);
+
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+      navigate('/login');
+    }
+  };
+
+  useEffect(() => {
+    callAboutPage();
+  }, []);
+
   return (
     <div className="container emp-profile">
       <div className="row">
         <div className="col-md-4">
           <div className="profile-img">
-            <img src={image} alt="image" />
+            <img
+              src={userData.name === 'Atharva Anand Machave' ? image : image1}
+              alt="image"
+            />
           </div>
         </div>
         <div className="col-md-6">
           <div className="profile-head">
-            <h5>Atharva Machave</h5>
-            <h6>Software Engineer</h6>
+            <h5>{userData.name}</h5>
+            <h6>{userData.work}</h6>
             <p className="profile-rating mt-3 mb-5">
               Rankings: <span>9/10</span>
             </p>
@@ -82,7 +120,7 @@ const About = () => {
                   <label>User Id :</label>
                 </div>
                 <div className="col-md-6">
-                  <p>11111111</p>
+                  <p>{userData._id}</p>
                 </div>
               </div>
               <div className="row">
@@ -96,19 +134,19 @@ const About = () => {
                   <label>Email :</label>
                 </div>
                 <div className="col-md-6">
-                  <p>atharva.machave@gmail.com</p>
+                  <p>{userData.email}</p>
                 </div>
                 <div className="col-md-5">
                   <label>phone :</label>
                 </div>
                 <div className="col-md-6">
-                  <p>9657972036</p>
+                  <p>{userData.phone}</p>
                 </div>
                 <div className="col-md-5">
                   <label>Profession :</label>
                 </div>
                 <div className="col-md-6">
-                  <p>Software developer</p>
+                  <p>{userData.work}</p>
                 </div>
               </div>
               {/* Add more about details here */}
