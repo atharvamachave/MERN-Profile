@@ -1,5 +1,9 @@
 /* Home.css */
 
+body {
+  overflow: hidden;
+}
+
 .section_10 {
   display: flex;
   flex-direction: column;
